@@ -1,0 +1,13 @@
+# Compiled Object files, static and dynamic libs, binaries
+*.o
+*.a
+*.so
+*.out
+debug
+internal/client
+
+# VS Code
+.vscode
+
+# Goland
+.idea
