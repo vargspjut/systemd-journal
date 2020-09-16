@@ -209,6 +209,22 @@ func (j *Journal) SeekTail() error {
 	return nil
 }
 
+// SeekTimestamp moves the cursor to the entry with the specified timestamp
+// NOTE: This call must be followed by a call to Next (or a similar call)
+// before any data can be read
+func (j *Journal) SeekTimestamp(timestamp time.Time) error {
+
+	usec := timestamp.UnixNano() / int64(time.Microsecond)
+
+	j.mutex.Lock()
+	defer j.mutex.Unlock()
+	if ret := C.sd_journal_seek_realtime_usec(j.sdJournal, C.uint64_t(usec)); ret < 0 {
+		return fmt.Errorf("failed seek to timestamp %v: %w", timestamp, syscall.Errno(-ret))
+	}
+
+	return nil
+}
+
 // SeekCursor moves cursor to specified cursor.
 // NOTE: This call must be followed by a call to Next (or a similar call)
 // before any data can be read
