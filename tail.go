@@ -9,6 +9,11 @@ import (
 	"time"
 )
 
+const (
+	// Timeout waiting for new journal entries
+	waitTimeout = time.Duration(300 * time.Millisecond)
+)
+
 // TailHandler is the callback that will receive journal entries.
 // If an error occurs during processing, entry will be nil and
 // err populated with the error encountered. An error is
@@ -24,7 +29,7 @@ type TailStop func()
 // Use the returned func to stop processing.
 // NOTE: Since the journal API does NOT allow multiple threads
 // to access the same instance, even with locking, a new instance
-// will be created with same configuration as the parent instance.
+// is created with same configuration as the parent instance.
 func (j *Journal) Tail(h TailHandler) (TailStop, error) {
 
 	if h != nil && reflect.ValueOf(h).IsNil() {
@@ -36,7 +41,7 @@ func (j *Journal) Tail(h TailHandler) (TailStop, error) {
 	cursor, err := j.Cursor()
 	if err != nil {
 		if errors.Is(err, syscall.EADDRNOTAVAIL) {
-			// Position is either BOF or EOF. Decide EOF since this
+			// Position does not point to an entry. Decide EOF since this
 			// is a tail method. Seek to tail, move one back and
 			// retry reading the cursor.
 			err = j.SeekTail()
@@ -107,7 +112,6 @@ exit:
 
 		if ret == 0 {
 			for {
-
 				select {
 				case <-done:
 					h(nil, ErrTailStopped)
@@ -115,7 +119,7 @@ exit:
 				default:
 				}
 
-				wue, err := jour.Wait(time.Duration(200 * time.Millisecond))
+				wue, err := jour.Wait(waitTimeout)
 				if err != nil {
 					h(nil, fmt.Errorf("failed to wait for new entries: %w", err))
 					break exit
