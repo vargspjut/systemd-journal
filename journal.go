@@ -63,6 +63,44 @@ const (
 	FieldMonotonicTimestamp      = "__MONOTONIC_TIMESTAMP"
 )
 
+// Priority is a type to describe log entry priority
+type Priority int
+
+func (p Priority) String() string {
+	names := []string{
+		"Emergency",
+		"Alert",
+		"Critical",
+		"Error",
+		"Warning",
+		"Notice",
+		"Info",
+		"Debug",
+	}
+
+	return names[p]
+}
+
+// Priority constants
+const (
+	// PriorityEmergency indictes taht the system is unusable
+	PriorityEmergency Priority = iota
+	// PriorityAlert indicates that an action must be taken immediately
+	PriorityAlert
+	// PriorityCritical indicats a critical condition
+	PriorityCritical
+	// PriorityError indicates an error condition
+	PriorityError
+	// PriorityWarning indicates a warning condition
+	PriorityWarning
+	// PriorityNotice indicates normal but significant condition
+	PriorityNotice
+	// PriorityInfo indicates an informal message
+	PriorityInfo
+	// PriorityDebug indidcates a debug-level messaage
+	PriorityDebug
+)
+
 var (
 	// ErrTailStopped is sent to handler if tail is externally stopped.
 	ErrTailStopped = errors.New("journal: tail stopped")
