@@ -1,3 +1,5 @@
+// +build linux
+
 package journal
 
 // #include <systemd/sd-journal.h>

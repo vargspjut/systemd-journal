@@ -1,3 +1,5 @@
+// +build linux
+
 package journal
 
 //// #cgo pkg-config: --cflags --libs libsystemd
