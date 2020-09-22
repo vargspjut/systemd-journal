@@ -70,7 +70,7 @@ if err := jour.AddMatch(m); err != nil {
     wlog.Fatal(err)
 }
 ```
-NOTE: sytemd-journal exposes all offically defined fields as *journal.Field[name].
+NOTE: systemd-journal exposes all offically defined fields as *journal.Field[name].
 
 ### Following
 To start following the journal from the **current** position, call *Follow*. Provide a callback to receive new journal entries in a thread safe manner. Call the returned *FollowStop* function to stop following.
