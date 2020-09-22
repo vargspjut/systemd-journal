@@ -102,8 +102,8 @@ const (
 )
 
 var (
-	// ErrTailStopped is sent to handler if tail is externally stopped.
-	ErrTailStopped = errors.New("journal: tail stopped")
+	// ErrFollowStopped is sent to handler if following is externally stopped.
+	ErrFollowStopped = errors.New("journal: follow stopped")
 )
 
 // WakeupEvent represents the outcome of a wait operation
