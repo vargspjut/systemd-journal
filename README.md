@@ -75,7 +75,7 @@ NOTE: sytemd-journal exposes all offically defined fields as *journal.Field[name
 ### Following
 To start following the journal from the **current** position, call *Follow*. Provide a callback to receive new journal entries in a thread safe manner. Call the returned *FollowStop* function to stop following.
 
-**NOTE 1**: If the current cursor doesn't point to an log entry, follow will automatically seek to the end of the journal and start following from there.
+**NOTE 1**: If the current cursor doesn't point to an log entry, Follow will automatically seek to the end of the journal and start following from there.
 
 **NOTE 2**: Follow runs in a go-routine. Since one single journal instance must not be called from multiple threads, a new instance will be created with the very same configuration and state as the parent instance.
 
@@ -128,7 +128,7 @@ To write to the journal, use the package-exported functions *Submit* or *SubmitW
 
 **NOTE 2** If *journal.FieldPriority* or *journal.FieldMessage* is part of fields when calling SubmitWithFields, arguments priority and message will be ignored. 
 
-**NOTE 3** All field names must be all upper-case and may not conain any preceeding '_' characters. An error will be returned if encountered.
+**NOTE 3** All field names must be all upper-case and may not contain any preceeding '_' characters. An error will be returned if encountered.
 
 ```golang
 // Code left out for brevity
