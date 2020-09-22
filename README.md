@@ -135,7 +135,7 @@ To write to the journal, use the package-exported functions *Submit* or *SubmitW
 
 // Write a simple log entry with logging
 // priority Informal
-journal.Submit(journal.PriorityNormal, "A message")
+journal.Submit(journal.PriorityInfo, "A message")
 
 // Write a log entry with custom fields and
 // priority Error.
