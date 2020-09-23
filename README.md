@@ -31,7 +31,7 @@ func main() {
         wlog.Fatal(err)
     }
     
-    // After each seek operation is paramount
+    // After each seek operation it's paramount
     // to call Next, Previous or similar to move
     // the cursor to point to an actual entry
     if _, err := jour.Next(); err != nil {
