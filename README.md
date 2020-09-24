@@ -166,7 +166,7 @@ func main() {
     // as the formatter. Also, note that the Writer
     // is set to journalwriter.WlogWriter.
     wlog.DefaultLogger().Configure(&wlog.Config{
-	    Formatter: wlog.JSONFormatter{},
+        Formatter: wlog.JSONFormatter{},
         Writer: journalwriter.WlogWriter{},
     })
 
