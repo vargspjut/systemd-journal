@@ -170,7 +170,7 @@ func main() {
         Writer: journalwriter.WlogWriter{},
     })
 
-    // Set come custom fields of the default logger
+    // Set some custom fields of the default logger
     // that will be part of each entry written to the journal.
     // Use wlog.WithScope to use fields for single entries.
     wlog.SetGlobalFields(wlog.Fields{
